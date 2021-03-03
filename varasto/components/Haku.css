@@ -1,0 +1,46 @@
+
+  
+  .Hakuvalikko {
+    height: 100vh;
+    width: 400px;
+    display: grid;
+    grid-area: nav;
+    justify-items: flex-start;
+    grid-template-rows: repeat(8, auto);
+    grid-template-columns: none;
+    grid-row-gap: 20px;
+  
+    padding: 30px 10px 30px;
+    background: rgba(19, 19, 19, 0.95);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .Hakuvalikko a {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    transition: 0.5s;
+    text-decoration: none;
+  }
+  .Hakuvalikko a:hover {
+    transform: scale(1.1);
+  }
+ 
+  @media (max-width: 600px) {
+    .Header {
+      grid-template-areas: " " "nav nav";
+    }
+    .Hakuvalikko {
+      grid-template-rows: repeat(4, auto);
+      grid-template-columns: none;
+      grid-row-gap: 20px;
+      width: 100vw;
+      padding: 30px 0 30px;
+      background: rgba(19, 19, 19, 0.95);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+  }
+  
