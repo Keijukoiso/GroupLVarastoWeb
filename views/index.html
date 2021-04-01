@@ -182,6 +182,13 @@ body {
     <form>
       <p><label for="nimi">Nimi</label></p>
       <p><input type="text" name="nimi"/></p>
+      <p>
+        <select name="kategoria">
+            {{#each kateg}}
+            <option value="{{this.kategoria}}">{{this.kategoria}}</option>
+            {{/each}}
+          </select>
+      </p>  
 
       <p><button id="buttonHae">Hae</button></p>
     </form>

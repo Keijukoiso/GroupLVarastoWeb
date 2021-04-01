@@ -31,7 +31,7 @@ const getKayttajat = () => {
     })
 }
 
-const getTuotteet = (nimi) => {
+const getTuotteet = (nimi, ktg) => {
     
     return new Promise((resolve, reject) => {
         
@@ -40,18 +40,46 @@ const getTuotteet = (nimi) => {
         let x = "WHERE "
         let params = [];
 
-        if (nimi != null) {
+        if (nimi != null || ktg != null) {
 
             if ( nimi != null  && nimi != "") {
                 query += x + "tuote_nimi LIKE ? ";
+                x = "AND "
                 let n = nimi + "%"
                 params.push(n);
+            }
+
+            if ( ktg != null  && ktg != "" && ktg != "Kategoria") {
+                query += x + "kategoria = ? ";
+                params.push(ktg);
             }
             
 
         }
         console.log(query);
         connection.query(query, params, function (error, result, fields) {
+
+            if (error) {
+                console.log("Virhe", error);
+                reject(error);
+            }
+            else {
+                resolve(result);
+            }
+        });
+    })
+}
+
+const getKtg = () => {
+    
+    return new Promise((resolve, reject) => {
+        
+        
+        let query = "SELECT DISTINCT kategoria FROM tuote "
+        
+
+        console.log(query);
+        connection.query(query, function (error, result, fields) {
 
             if (error) {
                 console.log("Virhe", error);
@@ -75,8 +103,12 @@ module.exports = {
         return getKayttajat();
     },
 
-    getTuote: (nimi) => {
-        return getTuotteet(nimi);
+    getTuote: (nimi, ktg) => {
+        return getTuotteet(nimi, ktg);
+    },
+
+    getKategoriat: () => {
+        return getKtg();
     },
 
 
