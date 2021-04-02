@@ -32,12 +32,35 @@ module.exports = {
 
         let empty = {id:-1, kategoria : "Kategoria" };
 
-        res.render('index', {               //Tällä saa index.html näkyviin!!
-            //kayttaja : [...k],
+        res.render('index', {
             kateg : [empty, ...k],
             tuote : [...t]
         });   
     },
 
+    tiedot: async (req, res) => {           
+        console.log("fetch started ...");
+        console.log(req.params.id);
+        let n = req.query;
+        let t;
+        
+        try {
+            t = await sql.getTiedot(req.params.id);
+            
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
+        }
+
+        
+        
+        console.log("done")
+        console.log(t);
+
+
+        res.render('tiedot', {
+            tuote: [...t]
+        });   
+    },
 
 }

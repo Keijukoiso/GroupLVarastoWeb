@@ -92,6 +92,29 @@ const getKtg = () => {
     })
 }
 
+const getInfo = (id) => {
+    
+    return new Promise((resolve, reject) => {
+        
+        //Lisää: määrän lasku
+        let query = "SELECT tuote.*, hyllykkö_tunnus as sijainti FROM tuote LEFT JOIN sijainti ON SIJAINTI_idSIJAINTI = idSIJAINTI WHERE idTUOTE = ?"
+        
+
+        console.log(query);
+        connection.query(query, id, function (error, result, fields) {
+
+            if (error) {
+                console.log("Virhe", error);
+                reject(error);
+            }
+            else {
+                resolve(result);
+            }
+        });
+    })
+
+    
+}
 
 
 
@@ -109,6 +132,10 @@ module.exports = {
 
     getKategoriat: () => {
         return getKtg();
+    },
+
+    getTiedot: (id) => {
+        return getInfo(id);
     },
 
 

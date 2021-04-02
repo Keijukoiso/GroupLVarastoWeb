@@ -8,6 +8,7 @@ let ctrl = require('../controllers/Controller');
 router.route('/').
     get(ctrl.fetch);
 
-
+router.route('/tiedot/:id').
+    get(ctrl.tiedot);
 
 module.exports = router;

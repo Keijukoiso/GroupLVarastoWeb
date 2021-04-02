@@ -30,8 +30,8 @@ var cors = function (req, res, next)
 app.use(cors);
 
 // importataan reitit
-const yritysRoutes = require('./routes/Routes');
-app.use(yritysRoutes);
+const Routes = require('./routes/Routes');
+app.use(Routes);
 
 
 

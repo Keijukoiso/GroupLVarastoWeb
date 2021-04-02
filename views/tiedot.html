@@ -1,0 +1,14 @@
+
+
+<div class="tuotetiedot">
+  {{#each tuote}}
+    <h1>{{this.tuote_nimi}}</h1>
+    <p>Määrä: {{this.maara}}</p>
+    <p>Kategoria: {{this.kategoria}}</p>
+    <p>Sijainti: {{this.sijainti}} Näytä kartalla</p>
+    <p class="description"> Lisätietoa: Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+      Nullam aliquam elementum est, at vestibulum augue consequat at. 
+      Donec euismod convallis felis. Nam sed molestie dolor. 
+      Proin in tortor sed augue consequat viverra.</p>
+  {{/each}}
+  
