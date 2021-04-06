@@ -1,8 +1,7 @@
 // npm install express
 // npm install handlebars
 // npm install consolidate
-
-// Jos ei pelaa vieläkään -> npm install mysql 
+// npm install mysql 
 
 var express = require('express');
 var cons = require('consolidate');
@@ -12,12 +11,13 @@ var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
-var port = 3000;                //Vaihda tähän se portti missä tietokanta pyörii
+var port = 3000;                
 var hostname = "127.0.0.1";
 
 app.engine('html', cons.handlebars);
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
+
 
 var cors = function (req, res, next)
 {
@@ -32,6 +32,8 @@ app.use(cors);
 // importataan reitit
 const Routes = require('./routes/Routes');
 app.use(Routes);
+app.use(express.static('./views/images'));
+
 
 
 

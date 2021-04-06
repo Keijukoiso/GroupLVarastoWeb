@@ -56,10 +56,36 @@ module.exports = {
         
         console.log("done")
         console.log(t);
-
-
+        
         res.render('tiedot', {
-            tuote: [...t]
+            nimi: t[0].tuote_nimi,
+            maara: t[0].maara,
+            kategoria: t[0].kategoria,
+            sijainti: t[0].sijainti,
+            
+        });   
+    },
+
+    kartta: async (req, res) => {           
+        console.log("fetch started ...");
+        console.log(req.params.id);
+        let n = req.query;
+        let t;
+        
+        try {
+            
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
+        }
+
+        
+        
+        console.log("done")
+        console.log(t);
+
+
+        res.render('kartta', {
         });   
     },
 

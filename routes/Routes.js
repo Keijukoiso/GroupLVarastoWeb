@@ -11,4 +11,7 @@ router.route('/').
 router.route('/tiedot/:id').
     get(ctrl.tiedot);
 
+    router.route('/kartta/:sijainti').
+    get(ctrl.kartta);
+
 module.exports = router;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1064.00" height="720.00" viewBox="0.00 0.00 1064.00 720.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g stroke-linecap="round" id="Layer_2">
+<path class="sij" id="J" d="M165.00,462.00 L303.00,462.00 L303.00,618.00 L165.00,618.00 L165.00,462.00 Z" style="fill:red;opacity:0"/>
+<path class="sij" id="I" d="M319.00,460.00 L454.00,460.00 L454.00,618.00 L319.00,618.00 L319.00,460.00 Z" style="fill:red;opacity:0" />
+<path class="sij" id="H" d="M473.00,496.00 L639.00,496.00 L639.00,615.00 L473.00,615.00 L473.00,496.00 Z" style="fill:red;opacity:0"/>
+<path class="sij" id="G" d="M662.00,544.00 L884.00,544.00 L884.00,615.00 L662.00,615.00 L662.00,544.00 Z" style="fill:red;opacity:0"/>
+<path class="sij" id="F" d="M905.00,456.00 L983.00,456.00 L983.00,615.00 L905.00,615.00 L905.00,456.00 Z" style="fill:red;opacity:0"/>
+<path class="sij" id="E" d="M903.00,276.00 L981.00,276.00 L981.00,438.00 L903.00,438.00 L903.00,276.00 Z" style="fill:red;opacity:0" />
+<path class="sij" id="D" d="M904.00,51.00 L985.00,51.00 L985.00,253.00 L904.00,253.00 L904.00,51.00 Z" style="fill:red;opacity:0"/>
+<path class="sij" id="C" d="M676.00,44.00 L885.00,44.00 L885.00,120.00 L676.00,120.00 L676.00,44.00 Z" style="fill:red;opacity:0"/>
+<path class="sij" id="B" d="M457.00,46.00 L661.00,46.00 L661.00,119.00 L457.00,119.00 L457.00,46.00 Z" style="fill:red;opacity:0"/>
+<path class="sij" id="A" d="M246.00,44.00 L439.00,44.00 L439.00,120.00 L246.00,120.00 L246.00,44.00 Z" style="opacity:1"/>
+</g>
+</svg>

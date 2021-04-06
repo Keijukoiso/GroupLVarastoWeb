@@ -1,14 +1,155 @@
+<style>
+  html {
+  height: 100%;
+}
+.row {
+  display: flex;
+  height: 100%;
+}
+
+.column {
+  flex: 50%;
+  height: auto;
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+#tiedot {
+  max-width: 40%;
+}
+#kartta {
+  width: auto;
+}
+#con {
+  position: relative;
+}
+#map, #mapsvg {
+  position: absolute;
+  width: 100%;
+  height: auto;
+}
 
 
-<div class="tuotetiedot">
-  {{#each tuote}}
-    <h1>{{this.tuote_nimi}}</h1>
-    <p>Määrä: {{this.maara}}</p>
-    <p>Kategoria: {{this.kategoria}}</p>
-    <p>Sijainti: {{this.sijainti}} Näytä kartalla</p>
-    <p class="description"> Lisätietoa: Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-      Nullam aliquam elementum est, at vestibulum augue consequat at. 
-      Donec euismod convallis felis. Nam sed molestie dolor. 
-      Proin in tortor sed augue consequat viverra.</p>
-  {{/each}}
+</style>
+
+<body>
+  <div class="row" >
+    <div class="column" id="tiedot">
+        <h1>{{nimi}}</h1>
+          
+        <table>
+          <tbody>
+            <tr>
+              <td>Määrä: </td>
+              <td>{{maara}}</td>
+            </tr>
+            <tr>
+              <td>Kategoria: </td>
+              <td>{{kategoria}}</td>
+            </tr>
+            <tr>
+              <td>Sijainti: </td>
+              <td>{{sijainti}}</td>
+            </tr>
+            <tr>
+              <td>Lisätietoa: </td>
+              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Nullam aliquam elementum est, at vestibulum augue consequat at. 
+                Donec euismod convallis felis. Nam sed molestie dolor. 
+                Proin in tortor sed augue consequat viverra.</td>
+            </tr>
+          </tbody>
+        </table>
+        
+    </div>
+
+    <div class="column">
+      <!-- Tab links -->
+  <div class="tab">
+    <button class="tablinks" onclick="Open(event, 'kuva')">Kuva</button>
+    <button class="tablinks" onclick="Open(event, 'kartta')">Kartta</button>
+  </div>
+
+  <!-- Tab content -->
+  <div id="kuva" class="tabcontent" >
+    <div class="fakeimg" style="height:200px; width: 200px;"></div>
+  </div>
+
+  <div id="kartta" class="tabcontent" ><button value="{{sijainti}}" onclick="korosta('{{sijainti}}')">klik</button>
+    <div id="con">
+      <img id="map" src="/map.jpg" alt="kartta">
+      <object id="mapsvg" data="/map.svg" >
+      
+    </div>
+      
+  </div>
+</body>
+
   
+<script>
+function Open(evt, Sivu) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(Sivu).style.display = "block";
+  evt.currentTarget.className += " active";
+  }
+  
+  function korosta(val) {
+    document.getElementById(val)
+      .setAttribute('opacity', '0,5');
+  	}
+
+
+  </script>

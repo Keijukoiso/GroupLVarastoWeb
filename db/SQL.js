@@ -108,7 +108,7 @@ const getInfo = (id) => {
                 reject(error);
             }
             else {
-                resolve(result);
+                resolve(JSON.parse(JSON.stringify(result)));
             }
         });
     })
