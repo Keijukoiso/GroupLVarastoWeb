@@ -116,6 +116,26 @@ const getInfo = (id) => {
     
 }
 
+const lisTuote = (t) => {
+    return new Promise((resolve, reject) => {
+
+        let query = "INSERT INTO tuote (tuote_nimi, maara, kategoria, TOIMITTAJA_idTOIMITTAJA, SIJAINTI_idSIJAINTI) VALUES (?, ?, ?, ?, ?)" ;
+        
+        connection.query(query, [t.tuote_nimi, t.maara, t.kategoria, t.TOIMITTAJA_idTOIMITTAJA, t.SIJAINTI_idSIJAINTI], function (error, result, fields) {
+
+            if (error) {
+                console.log("Virhe", error);
+                reject(error);
+            }
+            else {
+                console.log("Lisäys onnistui");
+                resolve(result);
+            }
+        });
+
+    })
+}
+
 
 
 
@@ -137,6 +157,10 @@ module.exports = {
     getTiedot: (id) => {
         return getInfo(id);
     },
+
+    addTuote: (t) => {
+        return lisTuote(t);
+    }
 
 
 }

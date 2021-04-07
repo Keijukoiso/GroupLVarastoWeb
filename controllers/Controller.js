@@ -89,4 +89,87 @@ module.exports = {
         });   
     },
 
+    add: async (req, res) => {
+        console.log("lisäys ");
+
+        console.log("body: " + JSON.stringify(req.body));
+        let t = req.body;
+        
+        const tuote = {
+            tuote_nimi: t.tuote_nimi,
+            maara: t.maara,
+            kategoria: t.kategoria,
+            TOIMITTAJA_idTOIMITTAJA: t.TOIMITTAJA_idTOIMITTAJA,
+            SIJAINTI_idSIJAINTI: t.SIJAINTI_idSIJAINTI,
+            };
+
+        
+
+        console.log("Tarkistetaan")
+ 
+        //Onko tyhjiä arvoja
+        if (t.tuote_nimi == "" || t.maara == "" || t.kategoria == "" || t.TOIMITTAJA_idTOIMITTAJA == "" || t.SIJAINTI_idSIJAINTI == ""|| 
+            t.tuote_nimi == undefined || t.maara == undefined || t.kategoria == undefined || t.TOIMITTAJA_idTOIMITTAJA == undefined || t.SIJAINTI_idSIJAINTI == undefined) {
+                let error_msg = "Tarkista annetut arvot";
+                console.log(error_msg);
+                res.json({status : "NOT OK", msg : error_msg});
+                return;
+        }
+        
+        //onko nimi jo kannassa
+        
+        try {
+            let n = await sql.getTuote(t.tuote_nimi);
+            if (n != "") {
+                let error_msg = "Nimi on jo tietokannassa";
+                console.log(error_msg);
+                res.json({status : "NOT OK", msg : error_msg});
+                return;
+            }
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
+        }
+
+        //Toimittaja id tarkistus KESKEN
+        try {
+            let t = await sql.getjotainjotain(t.TOIMITTAJA_idTOIMITTAJA);
+            if (t == "") {
+                let error_msg = "Toimittaja on virheellinen";
+                console.log(error_msg);
+                res.json({status : "NOT OK", msg : error_msg});
+                return;
+            }
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
+        }
+
+        //Sijainti id tarkistus KESKEN
+        try {
+            let t = await sql.getjotainjotain(t.SIJAINTI_idSIJAINTI);
+            if (t == "") {
+                let error_msg = "Sijainti on virheellinen";
+                console.log(error_msg);
+                res.json({status : "NOT OK", msg : error_msg});
+                return;
+            }
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
+        }
+
+
+        console.log("Tarkistus ok, lisätään")
+
+        try {
+            let l = await sql.addTuote(t);
+            console.log("done")
+            res.json(l);
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
+        }
+    },
+
 }
