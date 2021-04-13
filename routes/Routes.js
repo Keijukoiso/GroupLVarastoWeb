@@ -11,7 +11,11 @@ router.route('/').
 router.route('/tiedot/:id').
     get(ctrl.tiedot);
 
-    router.route('/kartta/:sijainti').
-    get(ctrl.kartta);
+
+router.route('/lisaa')
+    .get(ctrl.lisaa)
+    .post(ctrl.add);
+    
+    
 
 module.exports = router;

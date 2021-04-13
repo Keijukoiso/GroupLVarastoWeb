@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
     database: 'mydb'
 });
 
-
+//esimerkki jolla testattiin asioita, jätetään tähän sen varalle että jää aikaa kehittää sisäänkirjautumista tms
 const getKayttajat = () => {
     
     return new Promise((resolve, reject) => {
@@ -31,6 +31,7 @@ const getKayttajat = () => {
     })
 }
 
+//tuotteiden haku hakunäkymään
 const getTuotteet = (nimi, ktg) => {
     
     return new Promise((resolve, reject) => {
@@ -70,6 +71,7 @@ const getTuotteet = (nimi, ktg) => {
     })
 }
 
+//Kategorioiden haku
 const getKtg = () => {
     
     return new Promise((resolve, reject) => {
@@ -92,6 +94,76 @@ const getKtg = () => {
     })
 }
 
+//Sijaintien haku
+const getSij = () => {
+    
+    return new Promise((resolve, reject) => {
+        
+        
+        let query = "SELECT * idSIJAINTI FROM sijainti WHERE hyllykkö_tunnus = ? AND hylly_nro = ? "
+        
+
+        console.log(query);
+        connection.query(query, function (error, result, fields) {
+
+            if (error) {
+                console.log("Virhe", error);
+                reject(error);
+            }
+            else {
+                resolve(result);
+            }
+        });
+    })
+}
+
+//Hyllyköiden tunnusten haku
+const getHyllykot = () => {
+    
+    return new Promise((resolve, reject) => {
+        
+        
+        let query = "SELECT DISTINCT hyllykkö_tunnus FROM sijainti "
+        
+
+        console.log(query);
+        connection.query(query, function (error, result, fields) {
+
+            if (error) {
+                console.log("Virhe", error);
+                reject(error);
+            }
+            else {
+                resolve(result);
+            }
+        });
+    })
+}
+
+//hyllynumeroiden haku
+const getHyllyt = (hl) => {
+    
+    return new Promise((resolve, reject) => {
+        
+        
+        let query = "SELECT DISTINCT hylly_nro FROM sijainti "
+        
+
+        console.log(query);
+        connection.query(query, hl, function (error, result, fields) {
+
+            if (error) {
+                console.log("Virhe", error);
+                reject(error);
+            }
+            else {
+                resolve(result);
+            }
+        });
+    })
+}
+
+//tuotteiden tietojen haku
 const getInfo = (id) => {
     
     return new Promise((resolve, reject) => {
@@ -116,6 +188,26 @@ const getInfo = (id) => {
     
 }
 
+//tarkistukset
+const getTark = (taulu, sarake, haettava) => {
+    return new Promise((resolve, reject) => {
+        let query = "SELECT * from ? WHERE ? = ?";
+
+        connection.query(query, taulu, sarake, haettava, function (error, result, fields) {
+
+            if (error) {
+                console.log("Virhe", error);
+                reject(error);
+            }
+            else {
+                console.log("status result", result);
+                resolve(result);
+            }
+        });
+    })
+}
+
+//tuotteen lisäys
 const lisTuote = (t) => {
     return new Promise((resolve, reject) => {
 
@@ -160,7 +252,22 @@ module.exports = {
 
     addTuote: (t) => {
         return lisTuote(t);
-    }
+    },
 
+    getHyllykko: () => {
+        return getHyllykot();
+    },
+
+    getHylly: () => {
+        return getHyllyt();
+    },
+
+    getSijainti: () => {
+        return getSij(hk, hl);
+    },
+
+    getTarkistus: (taulu, sarake, haettava) => {
+        return getTark(taulu, sarake, haettava);
+    }
 
 }

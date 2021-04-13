@@ -7,9 +7,12 @@ var express = require('express');
 var cons = require('consolidate');
 var app = express();
 var path = require('path');
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
+
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({extended: true}));
 
 var port = 3000;                
 var hostname = "127.0.0.1";

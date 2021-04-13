@@ -1,0 +1,67 @@
+<style>
+p {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    background: rgb(114,114,114);
+    margin: 2px;
+    padding: 8px;
+  }
+  
+  #item1 { grid-area: a1; }
+  #item2 { grid-area: a2; }
+  #item3 { grid-area: a3; }
+  #item4 { grid-area: a4; }
+  #item5 { grid-area: a5; }
+  #item6 { grid-area: a6; }
+
+  form {
+    display: grid;
+    grid-template-areas: 
+    "a1 a1"
+    "a2 a3"
+    "a4 a5"
+    "a6 a7"
+    "a8 a8";
+    grid-template-rows: repeat(5, auto);
+    grid-template-columns: 10em 20em;
+    margin: 2px;
+    color:rgb(8, 8, 8);
+  }
+ 
+  </style>
+
+<h1>{{title}}</h1>
+<form method="POST" >
+  <p id = "item1">Lisää tuote</p>
+  <p id = "item2"><label for="tuote_nimi">Nimi</label></p>
+  <p id = "item3"><input type="text" name="tuote_nimi"/></p>
+  <p id = "item4"><label for="maara">Määrä</label></p>
+  <p id = "item5"><input type="text" name="maara"/></p>
+  <p id = "item6">Kategoria</p>    
+  <p id = "item7">
+    <select name="kategoria">
+        {{#each kateg}}
+        <option value="{{this.kategoria}}">{{this.kategoria}}</option>
+        {{/each}}
+      </select>
+  </p>
+  <p id = "item8">Hyllykkö tunnus</p>     
+  <p id = "item9">
+    <select name="hyllykkö_tunnus">
+        {{#each hyllykko}}
+        <option value="{{this.hyllykkö_tunnus}}">{{this.hyllykkö_tunnus}}</option>
+        {{/each}}
+      </select>
+  </p>  
+  <p id = "item10">Hyllyn numero</p> 
+  <p id = "item11">
+    <select name="hylly_nro">
+        {{#each hylly}}
+        <option value="{{this.hylly_nro}}">{{this.hylly_nro}}</option>
+        {{/each}}
+      </select>
+  </p>  
+  <p id = "item12"><input type="submit"></input></p>
+</form>
+
