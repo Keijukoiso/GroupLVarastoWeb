@@ -1,3 +1,10 @@
+
+<!--
+  TODO:
+  - css omaan tiedostoonsa. Miksi muilla toimii mutta tällä ei?
+  - kuvavälilehti näkyviin kun sivu avataan
+-->
+
 <style>
   html {
   height: 100%;
@@ -113,12 +120,14 @@ body {
 </style>
 
 <body onload="korosta('{{sijainti}}')">
+
   <div class="navbar">
-    <a href="#" class="active">Home</a>
-    <a href="/lisaa">Lisaa</a>
+    <a href="/" class="active">Home</a>
+    <a href="/lisaa">Lisää</a>
     <a href="#">Link</a>
     <a href="#" class="right">Link</a>
   </div>
+
   <div class="row" >
     <div class="column" id="tiedot">
         <h1>{{nimi}}</h1>
@@ -144,6 +153,13 @@ body {
                 Donec euismod convallis felis. Nam sed molestie dolor. 
                 Proin in tortor sed augue consequat viverra.</td>
             </tr>
+            <tr>
+              <td>
+                <form action="/del:{{id}}">
+                  <input type="submit" value="Poista" />
+              </form>
+              </td>
+            </tr>
           </tbody>
         </table>
         
@@ -163,7 +179,7 @@ body {
 
   <div id="kartta" class="tabcontent" >
     <div id="con">
-      <img id="map" src="/map.jpg" alt="kartta">
+      <img id="map" src="/images/map.jpg" alt="kartta">
       <svg id = mapsvg width="1064.00" height="720.00" viewBox="0.00 0.00 1064.00 720.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g stroke-linecap="round" id="mapsvg">
         <path class="sij" id="J" d="M165.00,462.00 L303.00,462.00 L303.00,618.00 L165.00,618.00 L165.00,462.00 Z" style="fill:red;opacity:0"/>
@@ -178,15 +194,8 @@ body {
         <path class="sij" id="A" d="M246.00,44.00 L439.00,44.00 L439.00,120.00 L246.00,120.00 L246.00,44.00 Z" style="fill:red;opacity:0"/>
         </g>
       </svg>
-
-        
-      
     </div>
-
-    
   </div>
-
-  
 </body>
 
   

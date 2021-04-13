@@ -1,38 +1,17 @@
-<style>
-p {
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    background: rgb(114,114,114);
-    margin: 2px;
-    padding: 8px;
-  }
-  
-  #item1 { grid-area: a1; }
-  #item2 { grid-area: a2; }
-  #item3 { grid-area: a3; }
-  #item4 { grid-area: a4; }
-  #item5 { grid-area: a5; }
-  #item6 { grid-area: a6; }
+<link rel="stylesheet" href="css/lisaa.css">
+<link rel="stylesheet" href="css/nav.css">
 
-  form {
-    display: grid;
-    grid-template-areas: 
-    "a1 a1"
-    "a2 a3"
-    "a4 a5"
-    "a6 a7"
-    "a8 a8";
-    grid-template-rows: repeat(5, auto);
-    grid-template-columns: 10em 20em;
-    margin: 2px;
-    color:rgb(8, 8, 8);
-  }
- 
-  </style>
 
 <h1>{{title}}</h1>
-<form method="POST" >
+
+<div class="navbar">
+  <a href="/" class="active">Home</a>
+  <a href="/lisaa">Lisää</a>
+  <a href="#">Link</a>
+  <a href="#" class="right">Link</a>
+</div>
+
+<form action="/lisaa" method="POST" >
   <p id = "item1">Lisää tuote</p>
   <p id = "item2"><label for="tuote_nimi">Nimi</label></p>
   <p id = "item3"><input type="text" name="tuote_nimi"/></p>

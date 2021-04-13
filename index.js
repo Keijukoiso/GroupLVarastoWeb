@@ -35,7 +35,7 @@ app.use(cors);
 // importataan reitit
 const Routes = require('./routes/Routes');
 app.use(Routes);
-app.use(express.static('./views/images'));
+app.use(express.static('./views'));
 
 
 

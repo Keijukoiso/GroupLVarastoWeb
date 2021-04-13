@@ -95,16 +95,16 @@ const getKtg = () => {
 }
 
 //Sijaintien haku
-const getSij = () => {
+const getSij = (hl) => {
     
     return new Promise((resolve, reject) => {
         
         
-        let query = "SELECT * idSIJAINTI FROM sijainti WHERE hyllykkö_tunnus = ? AND hylly_nro = ? "
+        let query = "SELECT idSIJAINTI FROM sijainti WHERE hyllykkö_tunnus = A AND hylly_nro = ? "
         
 
-        console.log(query);
-        connection.query(query, function (error, result, fields) {
+        console.log(query, hl);
+        connection.query(query, hl, function (error, result, fields) {
 
             if (error) {
                 console.log("Virhe", error);
@@ -164,6 +164,7 @@ const getHyllyt = (hl) => {
 }
 
 //tuotteiden tietojen haku
+//Saisiko yhdistettyä getTuotteet kanssa?
 const getInfo = (id) => {
     
     return new Promise((resolve, reject) => {
@@ -189,6 +190,7 @@ const getInfo = (id) => {
 }
 
 //tarkistukset
+//Tavoitteena että samalla voisi tarkistaa useita arvoja, ei tietoa onko hyvä idea
 const getTark = (taulu, sarake, haettava) => {
     return new Promise((resolve, reject) => {
         let query = "SELECT * from ? WHERE ? = ?";
@@ -207,7 +209,7 @@ const getTark = (taulu, sarake, haettava) => {
     })
 }
 
-//tuotteen lisäys
+//tuotteen lisäys kantaan
 const lisTuote = (t) => {
     return new Promise((resolve, reject) => {
 
@@ -263,7 +265,7 @@ module.exports = {
     },
 
     getSijainti: () => {
-        return getSij(hk, hl);
+        return getSij(hl);
     },
 
     getTarkistus: (taulu, sarake, haettava) => {
