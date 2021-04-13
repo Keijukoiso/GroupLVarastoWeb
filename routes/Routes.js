@@ -22,6 +22,6 @@ router.route('/add')
    
 //poistot
 router.route('/poista/:id')
-    .delete(ctrl.del);
+    .get(ctrl.del);
 
 module.exports = router;

@@ -73,7 +73,6 @@ const getTuotteet = (nimi, ktg) => {
 
 //Kategorioiden haku
 const getKtg = () => {
-    
     return new Promise((resolve, reject) => {
         
         
@@ -95,16 +94,15 @@ const getKtg = () => {
 }
 
 //Sijaintien haku
-const getSij = (hl) => {
-    
+const getSij = (hk, hl, sek) => {
     return new Promise((resolve, reject) => {
-        
-        
-        let query = "SELECT idSIJAINTI FROM sijainti WHERE hyllykkö_tunnus = A AND hylly_nro = ? "
-        
+        let params = [];
+        let query = "SELECT idSIJAINTI FROM sijainti WHERE hyllykkö_tunnus = ? AND hylly_nro = ? AND hylly_sektori = ?"
+        params.push(hk);
+        params.push(hl);
+        params.push(sek);
 
-        console.log(query, hl);
-        connection.query(query, hl, function (error, result, fields) {
+        connection.query(query, params, function (error, result, fields) {
 
             if (error) {
                 console.log("Virhe", error);
@@ -151,6 +149,29 @@ const getHyllyt = (hl) => {
 
         console.log(query);
         connection.query(query, hl, function (error, result, fields) {
+
+            if (error) {
+                console.log("Virhe", error);
+                reject(error);
+            }
+            else {
+                resolve(result);
+            }
+        });
+    })
+}
+
+//sektoreiden haku
+const getSektorit = () => {
+    
+    return new Promise((resolve, reject) => {
+        
+        
+        let query = "SELECT DISTINCT hylly_sektori FROM sijainti "
+        
+
+        console.log(query);
+        connection.query(query, function (error, result, fields) {
 
             if (error) {
                 console.log("Virhe", error);
@@ -230,6 +251,29 @@ const lisTuote = (t) => {
     })
 }
 
+const delTuot = (id) => {
+    return new Promise((resolve, reject) => {
+        let params = [];
+        let query = "DELETE FROM tuote WHERE idTUOTE = ?"
+        params.push(id)
+
+        console.log(query, id);
+        connection.query(query, params, function (error, result, fields) {
+
+            if (error) {
+                console.log("Virhe", error);
+                reject(error);
+            }
+            else {
+                resolve(result);
+            }
+        });
+        
+
+            
+    })
+}
+
 
 
 
@@ -263,13 +307,23 @@ module.exports = {
     getHylly: () => {
         return getHyllyt();
     },
+    
+    getSek : () => {
+        return getSektorit();
+    },
 
-    getSijainti: () => {
-        return getSij(hl);
+    getSijainti: (hk, hl, sek) => {
+        return getSij(hk, hl, sek);
     },
 
     getTarkistus: (taulu, sarake, haettava) => {
         return getTark(taulu, sarake, haettava);
+    },
+
+    delTuote: (id) => {
+        return delTuot(id);
     }
+
+    
 
 }

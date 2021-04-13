@@ -41,6 +41,14 @@
         {{/each}}
       </select>
   </p>  
-  <p id = "item12"><input type="submit"></input></p>
+  <p id = "item12">Hyllyn sektori</p> 
+  <p id = "item13">
+    <select name="hylly_sektori">
+        {{#each sektori}}
+        <option value="{{this.hylly_sektori}}">{{this.hylly_sektori}}</option>
+        {{/each}}
+      </select>
+  </p>  
+  <p id = "item14"><input type="submit"></input></p>
 </form>
 

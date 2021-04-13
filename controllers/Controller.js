@@ -42,7 +42,6 @@ module.exports = {
     tiedot: async (req, res) => {           
         console.log("fetch started ...");
         console.log(req.params.id);
-        let n = req.query;
         let t;
         
         //Kokeillaan hakea tiedot id:n perusteella
@@ -81,6 +80,7 @@ module.exports = {
         let k = [];
         let hk = [];
         let hl = [];
+        let sek = [];
         
         //Haetaan kategoriat
         try {
@@ -89,7 +89,7 @@ module.exports = {
             
         }
         catch (err) {
-            res.json({status : "NOT OK1", msg : err});
+            res.json({status : "NOT OK", msg : err});
         }
         
         //Haetaan hyllyköt
@@ -98,7 +98,7 @@ module.exports = {
             console.log("Hyllyköt:", hk);
         }
         catch (err) {
-            res.json({status : "NOT OK2", msg : err});
+            res.json({status : "NOT OK", msg : err});
         }
         //Haetaan hyllyt
         try {
@@ -106,7 +106,15 @@ module.exports = {
             console.log("Hyllyt:", hl);
         }
         catch (err) {
-            res.json({status : "NOT OK3", msg : err});
+            res.json({status : "NOT OK", msg : err});
+        }
+        //Haetaan sektorit
+        try {
+            sek = await sql.getSek();
+            console.log("sektorit:", sek);
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
         }
         
         console.log("done")
@@ -114,29 +122,34 @@ module.exports = {
         let emptyk = {id:-1, kategoria : "Valitse" };
         let emptyhl = {id:-1, hylly_nro : "Valitse" };
         let emptyhk = {id:-1, hyllykkö_tunnus : "Valitse" };
+        let emptysek = {id:-1, hylly_sektori : "Valitse" };
         
         //Renderöidään lisäyssivu saaduilla tiedoilla
         res.render('lisaa', {
             kateg : [emptyk, ...k],
             hyllykko: [emptyhk, ...hk],
-            hylly: [emptyhl, ...hl]
+            hylly: [emptyhl, ...hl],
+            sektori: [emptysek, ...sek]
         });   
         
     },
 
-    
+    /*TODO: 
+    - not ok korjaaminen, ei viemään pois sivulta
+    */
     //Tuotteiden lisäys kantaan
-    add: async (req, res, next) => {
+    add: async (req, res) => {
         console.log("lisäys ");
 
         console.log("body: " + JSON.stringify(req.body));
         let t = req.body;
-        let s = [];
+        let s;
         
         console.log("Sijaintia: ", t.hyllykkö_tunnus, t.hylly_nro);
         //tarkistetaan että käyttäjä on valinnut hyllyn ja hyllykön
         if (t.hyllykkö_tunnus == "" || t.hyllykkö_tunnus == undefined || t.hyllykkö_tunnus == "Valitse" ||
-            t.hylly_nro == "" || t.hylly_nro == undefined ||t.hylly_nro == "Valitse") {
+            t.hylly_nro == "" || t.hylly_nro == undefined ||t.hylly_nro == "Valitse" ||
+            t.hylly_sektori == "" || t.hylly_sektori == undefined || t.hylly_sektori == "Valitse") {
                 let error_msg = "Tarkista annetut arvot";
                 console.log(error_msg);
                 res.json({status : "NOT OK", msg : error_msg});
@@ -146,14 +159,13 @@ module.exports = {
         console.log("Sijainti haku",);
         //haetaan sijainnin id annettujen arvojen perusteella
         try {
-            let hk = t.hyllykkö_tunnus;
-            let hl = t.hylly_nro;
-            let sija = await sql.getSijainti(hk, hl);
-            console.log("Sijainti:", sija);
+            s = await sql.getSijainti(t.hyllykkö_tunnus, t.hylly_nro, t.hylly_sektori);
+            console.log("Sijainti:", s);
             
         }
         catch (err) {
             res.json({status : "NOT OKkk", msg : err});
+            return;
         }
 
         //Kantaan lisättävän tuotteen tiedot
@@ -250,15 +262,17 @@ module.exports = {
 
     //Tuotteen poisto kannasta
     del: async (req, res) => {
-        console.log("fetch started ...");
+        console.log("Delete ...");
+        console.log(req.params.id);
+        let t;
 
+        
         try {
             //Onko tuotetta olemassa
-            let n = req.body;
-            console.log("body: " + JSON.stringify(req.body));
-            let t = await sql.getTiedot(n.id);
-            let tuote = true;
-            
+            console.log("Tarkistetaan onko tuotetta olemassa ...");
+            t = await sql.getTiedot(req.params.id);
+            //let tuote = true;
+            console.log("Tuote löydetty!", t);
             //jos ei löydy
             if (t == "" || t == undefined) {
                 let error_msg = "Ei vastaavia tuloksia";
@@ -266,6 +280,14 @@ module.exports = {
                 res.json({status : "NOT OK", msg : error_msg});
                 return;
             }
+            
+        }
+        catch (err) {
+            res.json({status : "NOT OK1", msg : err});
+        }
+        try {
+            await sql.delTuote(req.params.id);
+            
             
             //Onko tilauksia (korvaa tarkistuksilla)
             /*
@@ -277,18 +299,15 @@ module.exports = {
             */
             
             //Jos löytyy, poista (tarkistuksiin joo)
-            await sql.delTuote(t.id);
             
 
-            res.json({ status: "Poisto onnistui", Poistettu : t });
+            console.log({ status: "Poisto onnistui", Poistettu : t });
         }
         catch (err) {
             res.json({status : "NOT OK", msg : err});
         }
+        res.redirect('/');
     },
 
-    lis: (req, res) => {
-        return lisaatest(req, res);
-    },
 
 }
