@@ -11,7 +11,6 @@ module.exports = {
         
         
         try {
-            //let k = await sql.getKayttaja();
             t = await sql.getTuote(n.nimi, n.kategoria);
             
         }
@@ -72,7 +71,6 @@ module.exports = {
     //Tuotteiden lisäyssivu
     /*Todo:
     - Toimittajan valinta
-    - 
     */
     lisaa: async (req, res) => {           
         console.log("fetch started ...");
@@ -134,9 +132,7 @@ module.exports = {
         
     },
 
-    /*TODO: 
-    - not ok korjaaminen, ei viemään pois sivulta
-    */
+
     //Tuotteiden lisäys kantaan
     add: async (req, res) => {
         console.log("lisäys ");
@@ -173,8 +169,8 @@ module.exports = {
             tuote_nimi: t.tuote_nimi,
             maara: t.maara,
             kategoria: t.kategoria,
-            TOIMITTAJA_idTOIMITTAJA: 1, //ei voi vielä valita toimittajaa
-            SIJAINTI_idSIJAINTI: 1, // Eikä sijaintia:)
+            TOIMITTAJA_idTOIMITTAJA: 1, //ei voi vielä valita toimittajaa--------------------------KESKEN
+            SIJAINTI_idSIJAINTI: 1, // Eikä sijaintia:)--------------------------------------------KESKEN, helppo!!!
             };
 
         
@@ -206,7 +202,13 @@ module.exports = {
         }
         console.log("Nimi ok");
 
-        /*//Toimittaja id tarkistus KESKEN
+        /*
+        Tarkistusten ideana siis:
+        Pistä menemään taulu, sarake ja tarkistettava arvo
+        SQL.js pitäisi olla yksi ja sama funktio millä molemmat tarkistukset hoidetaan.
+        
+        
+        //Toimittaja id tarkistus------------------------------------------------------------------KESKEN
         console.log("Tarkistetaan toimiala");
         try {
             let toim = await sql.getTarkistus("toimittaja", "idTOIMITTAJA", tt.TOIMITTAJA_idTOIMITTAJA);
@@ -221,12 +223,12 @@ module.exports = {
             res.json({status : "NOT OK", msg : err});
         }
         
-        console.log("Toimiala ok")
+        console.log("Toimiala ok");
         */
 
-        ;
+        
 
-        //Sijainti id tarkistus KESKEN
+        //Sijainti id tarkistus------------------------------------------------------------------KESKEN
         /*
         console.log("Sijainnin tarkistus");
 
@@ -256,8 +258,6 @@ module.exports = {
             res.json({status : "NOT OK1", msg : err});
         }
         res.redirect('/lisaa');
-        //
-        //res.render('lisaa'); //Ei pelaa sitten millään, ratkaise tämä 
     },
 
     //Tuotteen poisto kannasta
@@ -265,14 +265,14 @@ module.exports = {
         console.log("Delete ...");
         console.log(req.params.id);
         let t;
-
         
         try {
             //Onko tuotetta olemassa
             console.log("Tarkistetaan onko tuotetta olemassa ...");
             t = await sql.getTiedot(req.params.id);
-            //let tuote = true;
+
             console.log("Tuote löydetty!", t);
+
             //jos ei löydy
             if (t == "" || t == undefined) {
                 let error_msg = "Ei vastaavia tuloksia";
@@ -288,19 +288,7 @@ module.exports = {
         try {
             await sql.delTuote(req.params.id);
             
-            
-            //Onko tilauksia (korvaa tarkistuksilla)
-            /*
-            let t = await sql.getTilaukset(n.id);
-            
-            if ( t == "" ) {
-                tilaukset = false;
-            }
-            */
-            
-            //Jos löytyy, poista (tarkistuksiin joo)
-            
-
+            //Jos löytyy, poista
             console.log({ status: "Poisto onnistui", Poistettu : t });
         }
         catch (err) {

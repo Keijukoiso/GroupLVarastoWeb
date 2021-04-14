@@ -186,11 +186,12 @@ const getSektorit = () => {
 
 //tuotteiden tietojen haku
 //Saisiko yhdistettyä getTuotteet kanssa?
+//TODO: määrän lasku
 const getInfo = (id) => {
     
     return new Promise((resolve, reject) => {
         
-        //Lisää: määrän lasku
+        
         let query = "SELECT tuote.*, hyllykkö_tunnus as sijainti FROM tuote LEFT JOIN sijainti ON SIJAINTI_idSIJAINTI = idSIJAINTI WHERE idTUOTE = ?"
         
 
