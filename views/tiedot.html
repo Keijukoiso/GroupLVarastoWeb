@@ -168,7 +168,7 @@ body {
     <div class="column">
       <!-- Tab links -->
   <div class="tab">
-    <button class="tablinks" onclick="Open(event, 'kuva')">Kuva</button>
+    <button class="tablinks" id="kuva_btn" onclick="Open(event, 'kuva')">Kuva</button>
     <button class="tablinks" onclick="Open(event, 'kartta')">Kartta</button>
   </div>
 
@@ -225,9 +225,15 @@ function Open(evt, Sivu) {
     document.getElementById(val).style.opacity = '0.5';
   	}
 
+  // If amount < 10, show it in red
   function amount(val) {
     if (val < 10) {
       document.getElementById("maara").style.color = "red";
     }
+  }
+
+  // the image tab appears when the page is opened
+  window.onload=function(){
+    document.getElementById("kuva_btn").click();
   }
   </script>
