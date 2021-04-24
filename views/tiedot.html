@@ -119,7 +119,8 @@ body {
 
 </style>
 
-<body onload="korosta('{{sijainti}}'), amount('{{maara}}')">
+  
+<body onload="korosta('{{sijainti}}'), amount('{{maara}}'), document.getElementById('kuva_btn').click()">
 
   <div class="navbar">
     <a href="/" class="active">Home</a>
@@ -200,7 +201,9 @@ body {
 
   
 <script>
+  
 function Open(evt, Sivu) {
+  
   // Declare all variables
   var i, tabcontent, tablinks;
 
@@ -232,8 +235,4 @@ function Open(evt, Sivu) {
     }
   }
 
-  // the image tab appears when the page is opened
-  window.onload=function(){
-    document.getElementById("kuva_btn").click();
-  }
   </script>
