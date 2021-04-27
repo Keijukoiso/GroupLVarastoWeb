@@ -20,7 +20,7 @@ p {
   #item5 { grid-area: a5; }
   #item6 { grid-area: a6; }
 
-  #tiedot {
+  form {
     display: grid;
     grid-template-areas: 
     "a1 a1"
@@ -33,7 +33,6 @@ p {
     margin: 2px;
     color:rgb(8, 8, 8);
   }
-  
   @media screen and (max-width: 485px) {
     #tiedot {
       display: grid;
