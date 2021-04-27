@@ -34,3 +34,10 @@
     background-color: #666;
     color: white;
   }
+
+  @media screen and (max-width: 400px) {
+    .navbar a, .navbar a.right {
+      float: none;
+      width: 100%;
+    }
+  }

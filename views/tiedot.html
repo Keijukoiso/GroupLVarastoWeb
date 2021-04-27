@@ -115,7 +115,20 @@ body {
   width: 100%;
   height: auto;
 }
-
+@media screen and (max-width: 723px) {
+    .row {   
+      flex-direction: column;
+    }
+    #tiedot {
+      max-width: 100vw;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .navbar a, .navbar a.right {
+      float: none;
+      width: 100%;
+    }
+  }
 
 </style>
 
@@ -125,7 +138,6 @@ body {
   <div class="navbar">
     <a href="/" class="active">Home</a>
     <a href="/lisaa">Lisää</a>
-    <a href="#">Link</a>
     <a href="#" class="right">Link</a>
   </div>
 
