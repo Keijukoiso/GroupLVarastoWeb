@@ -19,6 +19,9 @@ router.route('/lisaa')
     
     
 router.route('/add')
+
+router.route('/kirjaudu')
+    .get(ctrl.kirjaudu);
    
 //poistot
 router.route('/poista/:id')

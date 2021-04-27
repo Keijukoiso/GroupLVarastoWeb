@@ -297,5 +297,14 @@ module.exports = {
         res.redirect('/');
     },
 
+    //kirjautuminen
+    kirjaudu: async (req, res) => {
+        
+        //Renderöidään tiedot-sivu saaduilla tiedoilla
+        res.render('kirjautuminen', {
+            
+        });   
+    },
+
 
 }
