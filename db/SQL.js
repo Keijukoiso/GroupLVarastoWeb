@@ -284,9 +284,10 @@ const getSal = (kn, ss) => {
         params.push(kn);
         params.push(ss);
 
-        if(idKAYTTAJA == "" || idKAYTTAJA == undefined){ //idKAYTTAJA on RowDataPacket ja sotkee TAAS kaiken
-            console.log("Käyttäjää ei löytynyt")
-        }
+        console.log("kayttajanimi: ", kn, ", Salasana: ", ss);
+        console.log("query: ", query);
+        console.log(query.result);
+        
         connection.query(query, params, function (error, result, fields) {
             if(error){
                console.log("Virhe", error);

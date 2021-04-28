@@ -326,13 +326,47 @@ module.exports = {
     salasana: async (req, res) => {
         console.log("tarkista täsmääkö salasana");
         console.log("body: " + JSON.stringify(req.body))
-        let k = req.body; //JOSTAIN syystä req.body on undefined ja koko paska kuolee siihen jos alasvetovalikost käyttäjä_nimi
+        let k = req.body; //JOSTAIN syystä req.body on undefined ja koko homma kuolee siihen jos alasvetovalikost käyttäjä_nimi
         let s;
-        let status = false; //tarkoituksen että kertoisiko onko kirjauduttu vai ei
+        let status = false; //tarkoituksena että muuttuja kertoisi onko kirjauduttu vai ei
 
         console.log("kayttis: ",k.kayttaja_nimi);
         console.log("salasana: ",k.salasana);
-        
+
+        //Käyttäjänimen tarkistus------------------------------------------------------------------
+        console.log("Tarkistetaan käyttäjänimi");
+        try {
+            let toim = await sql.getTarkistus("kayttaja", "kayttaja_nimi", k.kayttaja_nimi);
+            if (toim == "") {
+                let error_msg = "kayttaja on virheellinen";
+                console.log(error_msg);
+                res.json({status : "NOT OK", msg : error_msg});
+                return;
+            }
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
+        }
+        console.log("käyttäjä ok");
+
+        /*
+        //Salasanan tarkastus ------------------------------------------------------------------EI TOIMI
+        console.log("Tarkistetaan salasana");
+        try {
+            let toim = await sql.getTarkistus("kayttaja", "salasana", k.salasana);
+            if (toim == "") {
+                let error_msg = "salasana on virheellinen";
+                console.log(error_msg);
+                res.json({status : "NOT OK", msg : error_msg});
+                return;
+            }
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
+        }
+        console.log("salasana ok");
+        */
+
         
         //Tarkistetaan että salasana ja käyttäjä on annettu
         if(k.kayttaja_nimi == "" || k.kayttaja_nimi == undefined || // k.kayttaja_nimi == "Valitse" || (jos käyttää listaa tarvitaan)
@@ -344,18 +378,23 @@ module.exports = {
         }
         
 
+        //ANTAA ERRORIN MUTTA VAIHTAA status arvon
         console.log("kayttajan id haku...");
         //Haetaan idKAYTTAJA salasanan ja kayttajanimen mukaan jos ei löydy tiedot väärin
         try{
             s = await sql.getSalasana(k.kayttaja_nimi, k.salasana);
-            console.log("idKAYTTAJA: ", s);
-            if(s != "" && s != undefined){
-                console.log("Käyttäjä löytyi"); //LÖYTÄÄ ID:n RowDataPackettina mikä sotkee kaiken eli jää jumiin
+            console.log("ulos sql:stä");
+            console.log("idKAYTTAJA: ", s[0].idKAYTTAJA);
+            if(s[0].idKAYTTAJA != "" && s != undefined){ //Tähän kaatuu
+                console.log("Käyttäjä löytyi");
                 status = true;
-                res.render('kirjautuminen', {
-
-                });
+                console.log(status);
                 return;
+            }
+            else{
+                console.log("Käyttäjää ei löytynyt");
+                status=false;
+                console.log(status);
             }
         }
         catch (err) {
