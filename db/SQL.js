@@ -284,7 +284,7 @@ const getSal = (kn, ss) => {
         params.push(kn);
         params.push(ss);
 
-        if(idKAYTTAJA == "" || idKAYTTAJA == undefined){
+        if(idKAYTTAJA == "" || idKAYTTAJA == undefined){ //idKAYTTAJA on RowDataPacket ja sotkee TAAS kaiken
             console.log("Käyttäjää ei löytynyt")
         }
         connection.query(query, params, function (error, result, fields) {

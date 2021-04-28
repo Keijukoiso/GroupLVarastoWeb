@@ -171,6 +171,7 @@ module.exports = {
             kategoria: t.kategoria,
             TOIMITTAJA_idTOIMITTAJA: 1, //ei voi vielä valita toimittajaa--------------------------KESKEN
             SIJAINTI_idSIJAINTI: 1, // Eikä sijaintia:)--------------------------------------------KESKEN, helppo!!!
+            //sijainti pitää muuttaa fiksummaksi muuten kaikki ovat id:llä 1. s ei sovi koska tieto on Rowdatapackettina :D
             };
 
         
