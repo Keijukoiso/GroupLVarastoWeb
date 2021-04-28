@@ -10,44 +10,46 @@
   <a href="/kirjaudu" class="right">Kirjaudu</a>
 </div>
 
-<form id = "tiedot" action="/lisaa" method="POST" >
-  <p id = "item1">Lisää tuote</p>
-  <p id = "item2"><label for="tuote_nimi">Nimi</label></p>
-  <p id = "item3"><input type="text" name="tuote_nimi"/></p>
-  <p id = "item4"><label for="maara">Määrä</label></p>
-  <p id = "item5"><input type="text" name="maara"/></p>
-  <p id = "item6">Kategoria</p>    
-  <p id = "item7">
-    <select name="kategoria">
-        {{#each kateg}}
-        <option value="{{this.kategoria}}">{{this.kategoria}}</option>
-        {{/each}}
-      </select>
-  </p>
-  <p id = "item8">Hyllykkö tunnus</p>     
-  <p id = "item9">
-    <select name="hyllykkö_tunnus">
-        {{#each hyllykko}}
-        <option value="{{this.hyllykkö_tunnus}}">{{this.hyllykkö_tunnus}}</option>
-        {{/each}}
-      </select>
-  </p>  
-  <p id = "item10">Hyllyn numero</p> 
-  <p id = "item11">
-    <select name="hylly_nro">
-        {{#each hylly}}
-        <option value="{{this.hylly_nro}}">{{this.hylly_nro}}</option>
-        {{/each}}
-      </select>
-  </p>  
-  <p id = "item12">Hyllyn sektori</p> 
-  <p id = "item13">
-    <select name="hylly_sektori">
-        {{#each sektori}}
-        <option value="{{this.hylly_sektori}}">{{this.hylly_sektori}}</option>
-        {{/each}}
-      </select>
-  </p>  
-  <p id = "item14"><input type="submit"></input></p>
-</form>
+<h2>Lisää tuote</h2>
 
+<div class="container">
+  <form id = "tiedot" action="/lisaa" method="POST" >
+    <p id = "item1"><label for="tuote_nimi">Nimi</label></p>
+    <p id = "item2"><input type="text" name="tuote_nimi"/></p>
+    <p id = "item3"><label for="maara">Määrä</label></p>
+    <p id = "item4"><input type="text" name="maara"/></p>
+    <p id = "item5">Kategoria</p>    
+    <p id = "item6">
+      <select name="kategoria">
+          {{#each kateg}}
+          <option value="{{this.kategoria}}">{{this.kategoria}}</option>
+          {{/each}}
+        </select>
+    </p>
+    <p id = "item7">Hyllykkö tunnus</p>     
+    <p id = "item8">
+      <select name="hyllykkö_tunnus">
+          {{#each hyllykko}}
+          <option value="{{this.hyllykkö_tunnus}}">{{this.hyllykkö_tunnus}}</option>
+          {{/each}}
+        </select>
+    </p>  
+    <p id = "item9">Hyllyn numero</p> 
+    <p id = "item10">
+      <select name="hylly_nro">
+          {{#each hylly}}
+          <option value="{{this.hylly_nro}}">{{this.hylly_nro}}</option>
+          {{/each}}
+        </select>
+    </p>  
+    <p id = "item11">Hyllyn sektori</p> 
+    <p id = "item12">
+      <select name="hylly_sektori">
+          {{#each sektori}}
+          <option value="{{this.hylly_sektori}}">{{this.hylly_sektori}}</option>
+          {{/each}}
+        </select>
+    </p>  
+    <p id = "item13"><input type="submit"></input></p>
+  </form>
+</div>

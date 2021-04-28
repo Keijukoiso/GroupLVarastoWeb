@@ -47,7 +47,7 @@ const getTuotteet = (nimi, ktg) => {
             if ( nimi != null  && nimi != "") {
                 query += x + "tuote_nimi LIKE ? ";
                 x = "AND "
-                let n = nimi + "%"
+                let n = "%" + nimi + "%"
                 params.push(n);
             }
 

@@ -19,11 +19,11 @@
   <div class="side">
     <form>
       <p><label for="nimi">Nimi</label></p>
-      <p><input type="text" name="nimi"/></p>
+      <p><input id="nInput" type="text" name="nimi"/></p>
       <p>
-        <select name="kategoria">
+        <select id= "sInput" name="kategoria">
             {{#each kateg}}
-            <option value="{{this.kategoria}}">{{this.kategoria}}</option>
+            <option id="sInput" value="{{this.kategoria}}">{{this.kategoria}}</option>
             {{/each}}
           </select>
       </p>  

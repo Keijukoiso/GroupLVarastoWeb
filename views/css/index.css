@@ -28,7 +28,7 @@
     flex: 30%;
     background-color: #f1f1f1;
     padding: 20px;
-    height: 100%;
+    height: auto;
   }
   
   /* Main column */
@@ -70,10 +70,49 @@
       cursor: pointer;
       width: 100%;
       font-size: 15px;
+      max-width: 200px;
+      text-overflow: ellipsis;
     }
+
+    #nInput {
+      width: 100%;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    #sInput {
+      width: 100%;
+      
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      
+    }
+
+    #buttonHae {
+      width: 100%;
+      background-color: #838383;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    #buttonHae:hover {
+      background-color: rgb(151, 151, 151);
+    }
+   
   
-    .card button:hover {
+    .card .btn:hover {
       opacity: 0.7;
+      overflow: visible;
+      white-space: unset;
     }
   
     ::-webkit-scrollbar {
@@ -94,6 +133,8 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #555; 
     }
+
+    
   
   /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 723px) {
