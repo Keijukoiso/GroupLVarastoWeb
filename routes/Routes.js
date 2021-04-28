@@ -20,8 +20,10 @@ router.route('/lisaa')
     
 router.route('/add')
 
+//Kirjautumissivu
 router.route('/kirjaudu')
-    .get(ctrl.kirjaudu);
+    .get(ctrl.kirjaudu)
+    .post(ctrl.salasana);
    
 //poistot
 router.route('/poista/:id')

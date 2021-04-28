@@ -1,3 +1,4 @@
+const cons = require('consolidate');
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
@@ -13,7 +14,7 @@ const getKayttajat = () => {
     return new Promise((resolve, reject) => {
 
         
-        let query = "SELECT * FROM kayttaja"
+        let query = "SELECT DISTINCT kayttaja_nimi FROM kayttaja"
 
         
 
@@ -275,7 +276,28 @@ const delTuot = (id) => {
     })
 }
 
+const getSal = (kn, ss) => {
+    console.log("Etsitään ID...")
+    return new Promise((resolve, reject) => {
+        let params = [];
+        let query = "SELECT idKAYTTAJA FROM kayttaja WHERE kayttaja_nimi = ? AND salasana = ?"
+        params.push(kn);
+        params.push(ss);
 
+        if(idKAYTTAJA == "" || idKAYTTAJA == undefined){
+            console.log("Käyttäjää ei löytynyt")
+        }
+        connection.query(query, params, function (error, result, fields) {
+            if(error){
+               console.log("Virhe", error);
+               reject(error); 
+            }
+            else{
+                resolve(result);
+            }
+        });
+    })
+}
 
 
 module.exports = {
@@ -323,8 +345,11 @@ module.exports = {
 
     delTuote: (id) => {
         return delTuot(id);
-    }
+    },
 
+    getSalasana: (kn, ss) => {
+        return getSal(kn, ss);
+    }
     
 
 }

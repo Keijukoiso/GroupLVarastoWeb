@@ -299,12 +299,71 @@ module.exports = {
 
     //kirjautuminen
     kirjaudu: async (req, res) => {
-        
-        //Renderöidään tiedot-sivu saaduilla tiedoilla
-        res.render('kirjautuminen', {
+        console.log("HAETAAN KÄYTTÄJÄT")
+        let k = [];
+        /*
+        //Haetaan käyttäjänimet alasveto valikkoon
+        try {
+            k = await sql.getKayttaja();
+            console.log("Käyttäjät:", k);
             
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
+        }
+        
+        console.log("done")
+
+        let emptyk = {id:-1, kayttaja_nimi : "Valitse" };
+        */
+        //Renderöidään lisäyssivu saaduilla tiedoilla
+        res.render('kirjautuminen', {
+            //kaytn : [emptyk, ...k]
         });   
     },
 
 
+
+    //Salasanan tarkastaminen kirjautuessa
+    salasana: async (req, res) => {
+        console.log("tarkista täsmääkö salasana");
+        console.log("body: " + JSON.stringify(req.body))
+        let k = req.body; //JOSTAIN syystä req.body on undefined ja koko paska kuolee siihen jos alasvetovalikost käyttäjä_nimi
+        let s;
+        let status = false; //tarkoituksen että kertoisiko onko kirjauduttu vai ei
+
+        console.log("kayttis: ",k.kayttaja_nimi);
+        console.log("salasana: ",k.salasana);
+        
+        
+        //Tarkistetaan että salasana ja käyttäjä on annettu
+        if(k.kayttaja_nimi == "" || k.kayttaja_nimi == undefined || // k.kayttaja_nimi == "Valitse" || (jos käyttää listaa tarvitaan)
+        k.salasana == "" || k.salasana == undefined){
+            let error_msg = "Tarkista tiedot";
+            console.log(error_msg);
+            res.json({status : "NOT OK", msg : error_msg});
+            return;
+        }
+        
+
+        console.log("kayttajan id haku...");
+        //Haetaan idKAYTTAJA salasanan ja kayttajanimen mukaan jos ei löydy tiedot väärin
+        try{
+            s = await sql.getSalasana(k.kayttaja_nimi, k.salasana);
+            console.log("idKAYTTAJA: ", s);
+            if(s != "" && s != undefined){
+                console.log("Käyttäjä löytyi"); //LÖYTÄÄ ID:n RowDataPackettina mikä sotkee kaiken eli jää jumiin
+                status = true;
+                res.render('kirjautuminen', {
+
+                });
+                return;
+            }
+        }
+        catch (err) {
+            res.json({status : "NOT OK", msg : err});
+            return;
+        }
+        
+    }
 }
