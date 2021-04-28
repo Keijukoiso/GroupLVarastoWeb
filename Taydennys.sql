@@ -4,15 +4,11 @@
 SET AUTOCOMMIT=0;
 INSERT INTO kayttaja (kayttaja_nimi, kayttaja_rooli, salasana)VALUES
 ('HEIKKI', 'ADMIN', 'L3NTOkone'),
-('TOMMI', 'KAYTTAJA', 'Tietokone2'),
-('TIINA', 'ADMIN', 'palJONkamaa'),
-('PENTTI', 'KAYTTAJA', 'olenpasLUOVA'),
-('MAIJA', 'KAYTTAJA', 'Tietokone'),
-('LEENA', 'KAYTTAJA', 'mun4Kokkeli'),
-('PETRA', 'KAYTTAJA', 'mMmBaCoN'),
-('VENLA', 'KAYTTAJA', 'TohtoriK'),
-('TONI', 'KAYTTAJA', 'jAlkApAllo'),
-('JOONAS', 'KAYTTAJA', 'JoJoreferenc3');
+('TOMMI', 'ADMIN', 'Tietokone2'),
+('PENTTI', 'ADMIN', 'olenpasLUOVA'),
+('MAIJA', 'ADMIN', 'Tietokone'),
+('PETRA', 'ADMIN', 'mMmBaCoN'),
+('JOONAS', 'ADMIN', 'JoJoreferenc3');
 COMMIT;
 
 
@@ -73,42 +69,47 @@ COMMIT;
 SET AUTOCOMMIT =0;
 INSERT INTO tuote (tuote_nro, tuote_nimi, maara, kategoria, TOIMITTAJA_idTOIMITTAJA, SIJAINTI_idSIJAINTI) values
 -- tuote_nro voidaan korvata tuote_id:llä
-(2013696, 'BETAtex maski/suunsuoja kumilenkit 3-krs sininen type IIR 50kpl', 80, 'tää on varmaan turha', 1, 5),
-(13221124, 'A12T Dilutus 80% desinfektioaine keltainen 500ml', 5, 'tää on varmaan turha', 2, 1),
-(13221324, 'Värjätty A12t Dilutus 80% desinfektioaine keltainen 500ml', 12, 'tää on varmaan turha', 2, 1),
-(454471, '! Vacuette® Na-sitraatti-putki kierteetön 3,5ml 13x75mm 50kpl', 2, 'tää on varmaan turha', 1, 11),
-(454033, 'Vacuette® EDTA K3/NaF-putki kierteetön 4ml 13x75mm 50kpl', 2, 'tää on varmaan turha', 2, 16),
-(454244, '! Vacuette® Li-hepariiniputki kierteetön 4ml 13x75mm 50kpl', 2, 'tää on varmaan turha', 2, 8),
-(454204, 'Vacuette® seerumiputki kierteetön 4ml 13x75mm 50kpl', 2, 'tää on varmaan turha', 3, 5),
-(454020, 'Vacuette® EDTA K2 -putki PREMIUM 3ml 13x75mm 50kpl', 2, 'tää on varmaan turha', 3, 4),
-(349472, 'Jakoset lääkeannostelukortti 10kpl', 5, 'tää on varmaan turha', 3, 10),
-(13240124, 'Desinfektol P Desinfektioaine 500ml', 12, 'tää on varmaan turha', 1, 23),
-('TEHO', 'Teholava 60x80', 1, 'tää on varmaan turha', 3, 5),
+
+(2013696, 'BETAtex maski/suunsuoja kumilenkit 3-krs sininen type IIR 50kpl', 80, 'Suojaväline', 1, 5),
+(13221124, 'A12T Dilutus 80% desinfektioaine keltainen 500ml', 5, 'Puhdistusaine', 2, 1),
+(13221324, 'Värjätty A12t Dilutus 80% desinfektioaine keltainen 500ml', 12, 'Puhdistusaine', 2, 1),
+(454471, '! Vacuette® Na-sitraatti-putki kierteetön 3,5ml 13x75mm 50kpl', 2, 'Putki', 1, 11),
+(454033, 'Vacuette® EDTA K3/NaF-putki kierteetön 4ml 13x75mm 50kpl', 2, 'Putki', 2, 16),
+(454244, '! Vacuette® Li-hepariiniputki kierteetön 4ml 13x75mm 50kpl', 2, 'Putki', 2, 8),
+(454204, 'Vacuette® seerumiputki kierteetön 4ml 13x75mm 50kpl', 2, 'Putki', 3, 5),
+(454020, 'Vacuette® EDTA K2 -putki PREMIUM 3ml 13x75mm 50kpl', 2, 'Putki', 3, 4),
+(349472, 'Jakoset lääkeannostelukortti 10kpl', 5, 'Muu', 3, 10),
+(13240124, 'Desinfektol P Desinfektioaine 500ml', 12, 'Puhdistusaine', 1, 23),
+('TEHO', 'Teholava 60x80', 1, 'Muu', 3, 5),
+
 -- ---------
-(436610, 'KESTOKATETRI NELAT 2-T SILIK RUISKU CH12', 50, 'tää on varmaan turha', 1, 5),
-(400016, 'KIRURGINEN SUU-NENÄSUOJA IIR KINGFA(KO)', 150, 'tää on varmaan turha', 2, 1),
-(406352, 'MITTANAUHA LASIKUITU 150 CM OMPELIJAN', 10, 'tää on varmaan turha', 2, 1),
-(487322, 'Q-SYTE VENTTIILITULPPA', 3, 'tää on varmaan turha', 1, 11),
-(451424, 'TULPPA COMBI LL STER', 500, 'tää on varmaan turha', 2, 16),
-(400003, 'Tutkimuskäsine S nitriili pton (KO)', 10, 'tää on varmaan turha', 2, 8),
-(400017, 'Tutkimuskäsine nitriili L ston pton', 10, 'tää on varmaan turha', 3, 5),
-(400018, 'Tutkimuskäsine nitriili M ston pton', 20, 'tää on varmaan turha', 3, 4),
-(100001, 'RULLAKKO', 0, 'tää on varmaan turha', 3, 10),
-(100002, 'LAVA', 0, 'tää on varmaan turha', 1, 23),
-(100003, 'KOLLI', 0, 'tää on varmaan turha', 3, 5),
+
+(436610, 'KESTOKATETRI NELAT 2-T SILIK RUISKU CH12', 50, 'Ruisku', 1, 5),
+(400016, 'KIRURGINEN SUU-NENÄSUOJA IIR KINGFA(KO)', 150, 'Suojaväline', 2, 1),
+(406352, 'MITTANAUHA LASIKUITU 150 CM OMPELIJAN', 10, 'Mittausväline', 2, 1),
+(487322, 'Q-SYTE VENTTIILITULPPA', 3, 'Tulppa', 1, 11),
+(451424, 'TULPPA COMBI LL STER', 500, 'Tulppa', 2, 16),
+(400003, 'Tutkimuskäsine S nitriili pton (KO)', 10, 'Suojaväline', 2, 8),
+(400017, 'Tutkimuskäsine nitriili L ston pton', 10, 'Suojaväline',  3, 5),
+(400018, 'Tutkimuskäsine nitriili M ston pton', 20, 'Suojaväline',  3, 4),
+(100001, 'RULLAKKO', 0, 'Muu', 3, 10),
+(100002, 'LAVA', 0, 'Muu', 1, 23),
+(100003, 'KOLLI', 0, 'Muu', 3, 5),
 (100004, 'VARASTON TOIMITUSMAKSU', 1, 'MAKSU TILUAKSESTA/TOIMITUKSESTA', 2, 16),
+
 -- loput hanskat (SELVITÄ MITÄ LOPUSSA OLEVAT LUVUT ON -> mahdollisesti lisää "valmistajan osanumero")
-(487726, 'KÄSINE TUTKIMUS NITR PTON STON XL', 0, 'tää on varmaan turha', 2, 1),
-(487683, 'KÄSINE TUTKIMUS NITR PTON STON XS', 10, 'tää on varmaan turha', 2, 1),
-(489788, 'KÄSINE TUTKIMUS SELEFA L VALK PTON NITR', 3, 'tää on varmaan turha', 1, 11),
-(489775, 'KÄSINE TUTKIMUS SELEFA M VALK PTON NITR', 500, 'tää on varmaan turha', 2, 16),
-(489791, 'KÄSINE TUTKIMUS SELEFA XL VALK PTON NITR', 10, 'tää on varmaan turha', 2, 8),
-(489759, 'KÄSINE TUTKIMUS SELEFA XS VALK PTON NITR', 10, 'tää on varmaan turha', 3, 5),
-(489762, 'KÄSINE TUTK SELEFA S VALK PTON NITRIILI', 20, 'tää on varmaan turha', 3, 4),
-(487667, 'KÄSINE TUTKIMUS NITR PTON STON PITKÄV L', 0, 'tää on varmaan turha', 3, 10),
-(487654, 'KÄSINE TUTKIMUS NITR PTON STON PITKÄV M', 0, 'tää on varmaan turha', 1, 23),
-(487641, 'KÄSINE TUTKIMUS NITR PTON STON PITKÄV S', 0, 'tää on varmaan turha', 3, 5),
-(487670, 'KÄSINE TUTKIMUS NITR PTON STON PITKÄV XL', 1, 'tä on varmaan turha', 2, 16);
+
+(487726, 'KÄSINE TUTKIMUS NITR PTON STON XL', 0, 'Suojaväline',  2, 1),
+(487683, 'KÄSINE TUTKIMUS NITR PTON STON XS', 10, 'Suojaväline',  2, 1),
+(489788, 'KÄSINE TUTKIMUS SELEFA L VALK PTON NITR', 3, 'Suojaväline',  1, 11),
+(489775, 'KÄSINE TUTKIMUS SELEFA M VALK PTON NITR', 500, 'Suojaväline',  2, 16),
+(489791, 'KÄSINE TUTKIMUS SELEFA XL VALK PTON NITR', 10, 'Suojaväline',  2, 8),
+(489759, 'KÄSINE TUTKIMUS SELEFA XS VALK PTON NITR', 10, 'Suojaväline',  3, 5),
+(489762, 'KÄSINE TUTK SELEFA S VALK PTON NITRIILI', 20, 'Suojaväline',  3, 4),
+(487667, 'KÄSINE TUTKIMUS NITR PTON STON PITKÄV L', 0, 'Suojaväline',  3, 10),
+(487654, 'KÄSINE TUTKIMUS NITR PTON STON PITKÄV M', 0, 'Suojaväline',  1, 23),
+(487641, 'KÄSINE TUTKIMUS NITR PTON STON PITKÄV S', 0, 'Suojaväline',  3, 5),
+(487670, 'KÄSINE TUTKIMUS NITR PTON STON PITKÄV XL', 1, 'Suojaväline',  2, 16);
 COMMIT;
 
 
@@ -124,7 +125,7 @@ INSERT INTO tilaus (maara, tilaus_pvm, TOIMITTAJA_idTOIMITTAJA, TUOTE_idTUOTE) V
 COMMIT;
 
 
--- dumbing data for table lainaus
+-- dumbing data for table lainaus (Käytännössä turha :D)
 
 SET AUTOCOMMIT=0;
 -- id_lainaus luodaan automaattisesti
